@@ -10,9 +10,23 @@
 				color:#1AB224;
 			}
 			h2{
-				color:#E82C2C;
+				color:black;
 			}
+			.glyphicon-trash{
+				color:red;
+				
+				
+
+			}
+			.glyphicon-pencil{
+				color:green;
+				
+				
+				
+			}
+
 			
+		
 		</style>
 		</head>
 	<body>
@@ -49,7 +63,7 @@
 				}
 
 
-				$res = $db-> query("SELECT name, description,createDate FROM project");
+				$res = $db-> query("SELECT pname, pdescription,created,PID FROM projects");
 				$temp = $res->fetchAll(PDO::FETCH_ASSOC);
 				?>
 				<h2> Ausgabe der Datanbanktabelle 'project'</h2>
@@ -57,20 +71,28 @@
 				<?php print_r($temp); ?>
 				</div>
 				<h2> Tabellarische Form: </h2>
-				<table class="table table-striped">
+				<table class="table table-bordered">
   					<thead class="alert-info">
   						<th>Name: </th>
   						<th>Beschreibung: </th>
   						<th>Erstelldatum: </th>
+  						<th> Operations </th>
   					</thead>
   					 <tbody>
-  					 <?php
+  					 <?php 
 					foreach ($temp as $item)
 					{ 	
+						
 						echo"<tr>";
-						echo "<td>$item[name]</td>";
-						echo "<td>$item[description]</td>";
-						echo "<td>$item[createDate]</td>";
+						echo "<td>$item[pname]</td>";
+						echo "<td>$item[pdescription]</td>";
+						echo "<td>$item[created]</td>";
+						echo "<td>
+								  <a href=\"dbaccess.php?editID=$item[PID]\"<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span></a>  
+								  ___
+								  <a href=\"dbaccess.php?deleteID=$item[PID]\"<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a> 
+
+						</td>";
 						echo"</tr>";
 					}
 					echo "</tbody>";
